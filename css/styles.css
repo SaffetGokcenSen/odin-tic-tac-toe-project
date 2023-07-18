@@ -3,3 +3,57 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
 }
+
+.cell-1 {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    border: 1px solid red;
+}
+
+.cell-2 {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    border: 1px solid red;
+}
+
+.cell-3 {
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+    border: 1px solid red;
+}
+
+.cell-4 {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    border: 1px solid red;
+}
+
+.cell-5 {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    border: 1px solid red;
+}
+
+.cell-6 {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+    border: 1px solid red;
+}
+
+.cell-7 {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+    border: 1px solid red;
+}
+
+.cell-8 {
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+    border: 1px solid red;
+}
+
+.cell-9 {
+    grid-column: 3 / 4;
+    grid-row: 3 / 4;
+    border: 1px solid red;
+}
