@@ -21,7 +21,3 @@ const theBoard = (() => {
 }
 )();
 
-theBoard.createBoard(7);
-theBoard.setBoardContent(0, 0, 'x');
-theBoard.setBoardContent(1, 1, 'o');
-console.log(theBoard.getBoardContent());
