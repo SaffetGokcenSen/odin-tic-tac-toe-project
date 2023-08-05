@@ -57,6 +57,29 @@ const gameController = (() => {
       pArray[i].appendChild(radioButtonArray[i]);
       selectionDiv.appendChild(pArray[i]);
     }
+
+    const pClose = document.createElement('p');
+    pClose.style.display = 'flex';
+    pClose.style.flexDirection = 'row-reverse';
+    const closeButton = document.createElement('input');
+    closeButton.type = 'submit';
+    closeButton.value = 'CHOOSE';
+    pClose.appendChild(closeButton);
+    selectionDiv.appendChild(pClose);
+
+    const setDim = () => {
+      const selRadio = document.querySelector('input[name="dimension"]:checked');
+      if (selRadio !== null) {
+        theDim = +selRadio.value[0];
+        theBoard.createBoard(theDim);
+        theBoard.setBoardContent(0, 0, 'x');
+        theBoard.setBoardContent(1, 1, 'o');
+        console.log(theBoard.getBoardContent());
+        console.log(theDim);
+        selectionDiv.remove();
+      }
+    }
+    pClose.addEventListener("click", setDim);
   };
 
   return { getBoardDim, theDim };
