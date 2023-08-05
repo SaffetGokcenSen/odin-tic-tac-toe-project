@@ -21,3 +21,11 @@ const theBoard = (() => {
 }
 )();
 
+const gameController = (() => {
+  let theDim;
+  const getBoardDim = () => {
+  };
+
+  return { getBoardDim, theDim };
+}
+)();
