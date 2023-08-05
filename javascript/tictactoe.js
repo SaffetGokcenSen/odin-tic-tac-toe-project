@@ -58,6 +58,8 @@ const gameController = (() => {
       selectionDiv.appendChild(pArray[i]);
     }
 
+    radioButtonArray[0].checked = true;
+
     const pClose = document.createElement('p');
     pClose.style.display = 'flex';
     pClose.style.flexDirection = 'row-reverse';
@@ -69,15 +71,13 @@ const gameController = (() => {
 
     const setDim = () => {
       const selRadio = document.querySelector('input[name="dimension"]:checked');
-      if (selRadio !== null) {
-        theDim = +selRadio.value[0];
-        theBoard.createBoard(theDim);
-        theBoard.setBoardContent(0, 0, 'x');
-        theBoard.setBoardContent(1, 1, 'o');
-        console.log(theBoard.getBoardContent());
-        console.log(theDim);
-        selectionDiv.remove();
-      }
+      theDim = +selRadio.value[0];
+      theBoard.createBoard(theDim);
+      theBoard.setBoardContent(0, 0, 'x');
+      theBoard.setBoardContent(1, 1, 'o');
+      console.log(theBoard.getBoardContent());
+      console.log(theDim);
+      selectionDiv.remove();
     }
     pClose.addEventListener("click", setDim);
   };
