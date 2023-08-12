@@ -43,6 +43,7 @@ const gameController = (() => {
     // the body is made a flex container and radio buttons are centered.
     theBody.style.display = 'flex';
     theBody.style.justifyContent = 'center';
+    theBody.style.alignItems = 'center';
 
     // the instruction text is created and written to the text paragraph.
     const pText = document.createElement('p');
@@ -71,6 +72,7 @@ const gameController = (() => {
       pArray[i].style.display = 'flex';
       // the radio button and its label is centered.
       pArray[i].style.justifyContent = 'center';
+      pArray[i].style.alignItems = 'center';
       // the input element is created.
       radioButtonArray[i] = document.createElement('input');
       // the label of the input element is created.
