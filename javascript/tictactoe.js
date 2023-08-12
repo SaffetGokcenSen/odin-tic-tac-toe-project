@@ -100,11 +100,11 @@ const gameController = (() => {
     radioButtonArray[0].checked = true;
 
     // the paragraph to hold the choose button is created.
-    const pClose = document.createElement('p');
+    const pChoose = document.createElement('p');
     // the paragraph is a flex container.
-    pClose.style.display = 'flex';
+    pChoose.style.display = 'flex';
     // the choose button is at the rightmost of the paragraph.
-    pClose.style.flexDirection = 'row-reverse';
+    pChoose.style.flexDirection = 'row-reverse';
     // the input to be set as the choose button is created.
     const closeButton = document.createElement('input');
     // the input is a submit button.
@@ -112,9 +112,9 @@ const gameController = (() => {
     // the text of the button is 'CHOOSE'.
     closeButton.value = 'CHOOSE';
     // the choose button is appended to its paragraph.
-    pClose.appendChild(closeButton);
+    pChoose.appendChild(closeButton);
     // the choose button is appended to the selection div.
-    selectionDiv.appendChild(pClose);
+    selectionDiv.appendChild(pChoose);
 
     // the function to be invoked when the choose button is clicked.
     const setDim = () => {
@@ -133,7 +133,7 @@ const gameController = (() => {
       selectionDiv.remove();
     }
     // the click on the choose button is listened to.
-    pClose.addEventListener("click", setDim);
+    pChoose.addEventListener("click", setDim);
   };
 
   // an object with the method getBoardDim and the property theDim is returned.
