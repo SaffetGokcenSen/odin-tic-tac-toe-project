@@ -30,6 +30,33 @@ const theBoard = (() => {
 // the module to get the dimension of the board from the player(s).
 const gameController = (() => {
   let theDim; // the dimension of the board
+  const boardArray = []; // the array to hold the board content.
+
+  // draws the game board to the screen as soon as the requested dimension is 
+  // obtained from the user.
+  const drawTheBoard = () => {
+    // the body element of the board page.
+    const theBody = document.body;
+
+    // the div to hold the board is created and appended to the body.
+    const boardDiv = document.createElement('div');
+    theBody.appendChild(boardDiv);
+    boardDiv.className = "boardDiv";
+    boardDiv.style.gridTemplateColumns = `repeat(${theDim}, 1fr)`;
+    for (let i = 0; i < theDim; i += 1) {
+      boardArray[i] = [];
+      for (let j = 0; j < theDim; j += 1) {
+        const gridCell = document.createElement('div');
+        gridCell.style.gridColumnStart = i + 1;
+        gridCell.style.gridColumnEnd = i + 2;
+        gridCell.style.gridRowStart = j + 1;
+        gridCell.style.gridRowEnd = j + 2;
+        gridCell.className = "gridCell";
+        boardArray[i][j] = gridCell;
+        boardDiv.appendChild(gridCell);
+      }
+    }
+  }
 
   // builds the user interface to get the board dimension from the player(s).
   const getBoardDim = () => {
@@ -39,11 +66,6 @@ const gameController = (() => {
     // the div to hold the radio buttons is created and appended to the body.
     const selectionDiv = document.createElement('div');
     theBody.appendChild(selectionDiv);
-
-    // the body is made a flex container and radio buttons are centered.
-    theBody.style.display = 'flex';
-    theBody.style.justifyContent = 'center';
-    theBody.style.alignItems = 'center';
 
     // the instruction text is created and written to the text paragraph.
     const pText = document.createElement('p');
@@ -133,6 +155,9 @@ const gameController = (() => {
       console.log(theDim);
       // remove the selection user interface after the selection is made.
       selectionDiv.remove();
+
+      // draw the board to the screen
+      drawTheBoard(theDim);
     }
     // the click on the choose button is listened to.
     pChoose.addEventListener("click", setDim);
