@@ -43,6 +43,7 @@ const gameController = (() => {
     theBody.appendChild(boardDiv);
     boardDiv.className = "boardDiv";
     boardDiv.style.gridTemplateColumns = `repeat(${theDim}, 1fr)`;
+    boardDiv.style.gridTemplateRows = `repeat(${theDim}, 1fr)`;
     for (let i = 0; i < theDim; i += 1) {
       boardArray[i] = [];
       for (let j = 0; j < theDim; j += 1) {
