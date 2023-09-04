@@ -15,4 +15,7 @@ body {
 .gridCell {
     border-style: solid;
     border-color: blue;
+    display: grid;
+    justify-content: center;
+    align-items: center;
 }
