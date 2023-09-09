@@ -31,6 +31,8 @@ const theBoard = (() => {
 const gameController = (() => {
   let theDim; // the dimension of the board
   const boardArray = []; // the array to hold the board content.
+  // the array to hold the player notifications and change-player button.
+  const playerNoticeButtonArray = [];
 
   // draws the game board to the screen as soon as the requested dimension is 
   // obtained from the user.
@@ -57,6 +59,27 @@ const gameController = (() => {
         boardDiv.appendChild(gridCell);
       }
     }
+
+    // the div to hold the player notifications and the change button
+    const gameButtonsDiv = document.createElement('div');
+    gameButtonsDiv.className = "gameButtons";
+    theBody.appendChild(gameButtonsDiv);
+    // first player notification
+    const player1Notice = document.createElement('div');
+    player1Notice.textContent = "PLAYER 1'S TURN NOW!"
+    gameButtonsDiv.appendChild(player1Notice);
+    playerNoticeButtonArray[0] = player1Notice;
+    // change player button
+    const changePlayerButton = document.createElement('input');
+    changePlayerButton.type = 'submit';
+    changePlayerButton.value = 'Change player';
+    gameButtonsDiv.appendChild(changePlayerButton);
+    playerNoticeButtonArray[1] = changePlayerButton;
+    // second player notification
+    const player2Notice = document.createElement('div');
+    player2Notice.textContent = "PLAYER 2'S TURN NOW!";
+    gameButtonsDiv.appendChild(player2Notice);
+    playerNoticeButtonArray[2] = player1Notice;
   }
 
   // builds the user interface to get the board dimension from the player(s).
