@@ -3,6 +3,8 @@ body {
     justify-content: center;
     align-items: center;
     width: 100vw;
+    gap: 2vw; 
+
 }
 
 .boardDiv {
@@ -18,4 +20,12 @@ body {
     display: grid;
     justify-content: center;
     align-items: center;
+}
+
+.gameButtons {
+    display: flex;
+    flex-direction: column;
+    width: 11vw;
+    height: 22vw;
+    justify-content: space-around;
 }
