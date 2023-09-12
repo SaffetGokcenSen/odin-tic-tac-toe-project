@@ -33,10 +33,59 @@ const gameController = (() => {
   const boardArray = []; // the array to hold the board content.
   // the array to hold the player notifications and change-player button.
   const playerNoticeButtonArray = [];
+  let whichPlayer = "player1";
+  let cellLocation;
+  const markedCells = [];
+  let markPut = 0;
 
   // draws the game board to the screen as soon as the requested dimension is 
   // obtained from the user.
   const drawTheBoard = () => {
+
+    const nextPlayerFunc = () => {
+      if (whichPlayer === "player1") {
+        playerNoticeButtonArray[0].textContent = "";
+        playerNoticeButtonArray[2].textContent = "PLAYER 2'S TURN NOW!";
+        whichPlayer = "player2";
+        changePlayerButton.disabled = true;
+      }
+      else {
+        playerNoticeButtonArray[2].textContent = "";
+        playerNoticeButtonArray[0].textContent = "PLAYER 1'S TURN NOW!";
+        whichPlayer = "player1";
+        changePlayerButton.disabled = true;
+      }
+      markedCells.push(cellLocation);
+      markPut = 0;
+    }
+
+    function drawSign() {
+      cellLocation = this.style.gridRowStart + this.style.gridColumnStart;
+      if ((markedCells.find((element) => element === cellLocation) === undefined)) {
+        if ((this.textContent === "") && (markPut === 0)) {
+          if (whichPlayer === "player1") {
+            this.textContent = "X";
+          }
+          else {
+            this.textContent = "O";
+          }
+          changePlayerButton.disabled = false;
+          markPut += 1;
+        }
+        else if ((this.textContent === "") && (markPut !== 0)) {
+          changePlayerButton.disabled = false;
+        }
+        else if ((this.textContent !== "") && (markPut === 0)) {
+          changePlayerButton.disabled = true;
+        }
+        else if ((this.textContent !== "") && (markPut !== 0)) {
+          this.textContent = "";
+          markPut = 0;
+          changePlayerButton.disabled = true;
+        }
+      }
+    }
+
     // the body element of the board page.
     const theBody = document.body;
 
@@ -55,6 +104,8 @@ const gameController = (() => {
         gridCell.style.gridRowStart = j + 1;
         gridCell.style.gridRowEnd = j + 2;
         gridCell.className = "gridCell";
+        gridCell.textContent = "";
+        gridCell.addEventListener('click', drawSign);
         boardArray[i][j] = gridCell;
         boardDiv.appendChild(gridCell);
       }
@@ -73,13 +124,15 @@ const gameController = (() => {
     const changePlayerButton = document.createElement('input');
     changePlayerButton.type = 'submit';
     changePlayerButton.value = 'Change player';
+    changePlayerButton.disabled = true;
+    changePlayerButton.addEventListener('click', nextPlayerFunc);
     gameButtonsDiv.appendChild(changePlayerButton);
     playerNoticeButtonArray[1] = changePlayerButton;
     // second player notification
     const player2Notice = document.createElement('div');
-    player2Notice.textContent = "PLAYER 2'S TURN NOW!";
+    player2Notice.textContent = "";
     gameButtonsDiv.appendChild(player2Notice);
-    playerNoticeButtonArray[2] = player1Notice;
+    playerNoticeButtonArray[2] = player2Notice;
   }
 
   // builds the user interface to get the board dimension from the player(s).
