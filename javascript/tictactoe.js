@@ -78,7 +78,6 @@ const gameController = (() => {
       markedCellsTemp = [];
       // the next player has not put a mark yet.
       markPut = 0;
-      console.log(markedCells);
     }
 
     // the function which enables a player to put a mark on the board following 
@@ -269,8 +268,6 @@ const gameController = (() => {
       theBoard.createBoard(theDim);
       theBoard.setBoardContent(0, 0, 'x');
       theBoard.setBoardContent(1, 1, 'o');
-      console.log(theBoard.getBoardContent());
-      console.log(theDim);
       // remove the selection user interface after the selection is made.
       selectionDiv.remove();
 
