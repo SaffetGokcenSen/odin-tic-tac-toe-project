@@ -33,55 +33,96 @@ const gameController = (() => {
   const boardArray = []; // the array to hold the board content.
   // the array to hold the player notifications and change-player button.
   const playerNoticeButtonArray = [];
+  // holds the info about which player's turn in the game.
   let whichPlayer = "player1";
+  // holds the cell location the player ticks on.
   let cellLocation;
-  const markedCells = [];
+  // the array to hold the locations of the marked cells.
+  let markedCells = [];
+  // the array to manipulate the locations of the cells clicked before the final 
+  // choice
+  let markedCellsTemp = [];
+  // the variable to indicate if the player has put a mark on the board.
   let markPut = 0;
 
   // draws the game board to the screen as soon as the requested dimension is 
   // obtained from the user.
   const drawTheBoard = () => {
 
+    // the function which is invoked when the "Change player" button is pressed.
     const nextPlayerFunc = () => {
       if (whichPlayer === "player1") {
+        // erase the notification that it is the turn of the player 1.
         playerNoticeButtonArray[0].textContent = "";
+        // write the notification that it is the turn of the player 2.
         playerNoticeButtonArray[2].textContent = "PLAYER 2'S TURN NOW!";
+        // now, it is the turn of the second player.
         whichPlayer = "player2";
+        // the player cannot be changed until a valid marking.
         changePlayerButton.disabled = true;
       }
       else {
+        // erase the notification that it is the turn of the player 2.
         playerNoticeButtonArray[2].textContent = "";
+        // write the notification that it is the turn of the player 1.
         playerNoticeButtonArray[0].textContent = "PLAYER 1'S TURN NOW!";
+        // now, it is the turn of the first player.
         whichPlayer = "player1";
+        // the player cannot be changed until a valid marking.
         changePlayerButton.disabled = true;
       }
-      markedCells.push(cellLocation);
+      // register the position of the cell on which a mark has been put 
+      // following the rules of the game.
+      markedCells = markedCells.concat(markedCellsTemp);
+      // free the temporary array of cell locations
+      markedCellsTemp = [];
+      // the next player has not put a mark yet.
       markPut = 0;
+      console.log(markedCells);
     }
 
+    // the function which enables a player to put a mark on the board following 
+    // the rules of the game.
     function drawSign() {
+      // the location of the cell the player has clicked on.
       cellLocation = this.style.gridRowStart + this.style.gridColumnStart;
+      // if the clicked cell is empty
       if ((markedCells.find((element) => element === cellLocation) === undefined)) {
+        // if the cell is empty and the player has not put a mark
         if ((this.textContent === "") && (markPut === 0)) {
+          // "X" is put on the cell if it is the turn of the player 1.
           if (whichPlayer === "player1") {
             this.textContent = "X";
           }
+          // "O" is put on the cell if it is the turn of the player 2.
           else {
             this.textContent = "O";
           }
+          // "Change player" button is enabled.
           changePlayerButton.disabled = false;
+          // the info that the player in turn has put a mark is recorded.
           markPut += 1;
+          // prospective clicked cell location recorded.
+          markedCellsTemp.push(cellLocation);
         }
+        // else if the clicked cell is empty and the player has already put a 
+        // mark on a cell
         else if ((this.textContent === "") && (markPut !== 0)) {
+          // do not put a mark and keep or make the "Change player" button inactive.
           changePlayerButton.disabled = false;
         }
+        // else if the cell is already marked 
         else if ((this.textContent !== "") && (markPut === 0)) {
+          // keep or make the "Change player" button inactive.
           changePlayerButton.disabled = true;
         }
+        // the player is erasing the mark put in this turn.
         else if ((this.textContent !== "") && (markPut !== 0)) {
           this.textContent = "";
           markPut = 0;
           changePlayerButton.disabled = true;
+          // the location of the cell the player has cancelled is removed.
+          markedCellsTemp.pop();
         }
       }
     }
