@@ -16,10 +16,11 @@ body {
 
 .gridCell {
     border-style: solid;
-    border-color: blue;
+    border-color: grey;
     display: grid;
     justify-content: center;
     align-items: center;
+    background-color: cadetblue;
 }
 
 .gameButtons {
