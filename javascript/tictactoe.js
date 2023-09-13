@@ -74,6 +74,8 @@ const gameController = (() => {
       // register the position of the cell on which a mark has been put 
       // following the rules of the game.
       markedCells = markedCells.concat(markedCellsTemp);
+      // the finally selected cell gets its default color
+      boardArray[markedCellsTemp[0][1]-1][markedCellsTemp[0][0]-1].style.backgroundColor = "cadetblue";
       // free the temporary array of cell locations
       markedCellsTemp = [];
       // the next player has not put a mark yet.
@@ -92,10 +94,14 @@ const gameController = (() => {
           // "X" is put on the cell if it is the turn of the player 1.
           if (whichPlayer === "player1") {
             this.textContent = "X";
+            // the prospective cell of the first player becomes red.
+            this.style.backgroundColor = "red";
           }
           // "O" is put on the cell if it is the turn of the player 2.
           else {
             this.textContent = "O";
+            // the prospective cell of the first player becomes blue.
+            this.style.backgroundColor = "blue";
           }
           // "Change player" button is enabled.
           changePlayerButton.disabled = false;
@@ -118,6 +124,8 @@ const gameController = (() => {
         // the player is erasing the mark put in this turn.
         else if ((this.textContent !== "") && (markPut !== 0)) {
           this.textContent = "";
+          // the cancelled cell gets back its default color.
+          this.style.backgroundColor = "cadetblue";
           markPut = 0;
           changePlayerButton.disabled = true;
           // the location of the cell the player has cancelled is removed.
