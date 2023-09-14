@@ -165,6 +165,7 @@ const gameController = (() => {
     theBody.appendChild(gameButtonsDiv);
     // first player notification
     const player1Notice = document.createElement('div');
+    player1Notice.className = "playerNotice";
     player1Notice.textContent = "PLAYER 1'S TURN NOW!"
     gameButtonsDiv.appendChild(player1Notice);
     playerNoticeButtonArray[0] = player1Notice;
@@ -178,6 +179,7 @@ const gameController = (() => {
     playerNoticeButtonArray[1] = changePlayerButton;
     // second player notification
     const player2Notice = document.createElement('div');
+    player2Notice.className = "playerNotice";
     player2Notice.textContent = "";
     gameButtonsDiv.appendChild(player2Notice);
     playerNoticeButtonArray[2] = player2Notice;
@@ -279,6 +281,14 @@ const gameController = (() => {
       // remove the selection user interface after the selection is made.
       selectionDiv.remove();
 
+      const fontSizes = {
+        3: "28px",
+        5: "24px",
+        7: "20px"
+      }
+      const theRoot = document.querySelector(":root");
+      theRoot.style.fontSize = fontSizes[theDim];
+      
       // draw the board to the screen
       drawTheBoard();
     }
