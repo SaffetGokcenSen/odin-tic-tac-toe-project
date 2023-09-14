@@ -21,6 +21,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: cadetblue;
+    font-size: 1.5rem;
 }
 
 .gameButtons {
@@ -29,4 +30,8 @@ body {
     width: 11vw;
     height: 22vw;
     justify-content: space-around;
+}
+
+.playerNotice {
+    font-size: 18px;
 }
