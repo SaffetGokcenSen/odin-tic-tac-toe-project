@@ -273,14 +273,14 @@ const gameController = (() => {
       theDim = +selRadio.value[0];
       // create the board array and initialize its content according to the 
       // selected dimension.
-      theBoard.createBoard(theDim);
-      theBoard.setBoardContent(0, 0, 'x');
-      theBoard.setBoardContent(1, 1, 'o');
+      // theBoard.createBoard(theDim);
+      // theBoard.setBoardContent(0, 0, 'x');
+      // theBoard.setBoardContent(1, 1, 'o');
       // remove the selection user interface after the selection is made.
       selectionDiv.remove();
 
       // draw the board to the screen
-      drawTheBoard(theDim);
+      drawTheBoard();
     }
     // the click on the choose button is listened to.
     pChoose.addEventListener("click", setDim);
