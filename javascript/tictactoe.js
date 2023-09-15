@@ -75,7 +75,7 @@ const gameController = (() => {
       // following the rules of the game.
       markedCells = markedCells.concat(markedCellsTemp);
       // the finally selected cell gets its default color
-      boardArray[markedCellsTemp[0][1]-1][markedCellsTemp[0][0]-1].style.backgroundColor = "cadetblue";
+      boardArray[markedCellsTemp[0][0]-1][markedCellsTemp[0][1]-1].style.backgroundColor = "cadetblue";
       // free the temporary array of cell locations
       markedCellsTemp = [];
       // the next player has not put a mark yet.
@@ -147,10 +147,10 @@ const gameController = (() => {
       boardArray[i] = [];
       for (let j = 0; j < theDim; j += 1) {
         const gridCell = document.createElement('div');
-        gridCell.style.gridColumnStart = i + 1;
-        gridCell.style.gridColumnEnd = i + 2;
-        gridCell.style.gridRowStart = j + 1;
-        gridCell.style.gridRowEnd = j + 2;
+        gridCell.style.gridRowStart = i + 1;
+        gridCell.style.gridRowEnd = i + 2;
+        gridCell.style.gridColumnStart = j + 1;
+        gridCell.style.gridColumnEnd = j + 2;
         gridCell.className = "gridCell";
         gridCell.textContent = "";
         gridCell.addEventListener('click', drawSign);
