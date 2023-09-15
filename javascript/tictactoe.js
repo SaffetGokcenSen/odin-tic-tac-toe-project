@@ -281,11 +281,14 @@ const gameController = (() => {
       // remove the selection user interface after the selection is made.
       selectionDiv.remove();
 
+      // the font size is matched with the selected board dimension using an 
+      // object literal
       const fontSizes = {
         3: "28px",
         5: "24px",
         7: "20px"
       }
+      // the html element font size is set according to the selected board dimension
       const theRoot = document.querySelector(":root");
       theRoot.style.fontSize = fontSizes[theDim];
       
