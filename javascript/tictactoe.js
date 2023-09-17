@@ -21,9 +21,19 @@ const theBoard = (() => {
     boardContent[x][y] = theMark;
   };
 
+  const gameComplete = (x, y, theMark) => {
+    const allSame = (value) => value === theMark;
+    // console.log(boardContent[x].every(isRowDone));
+    // console.log();
+    // console.log(boardContent.map((value) => value[y]).every(isRowDone));
+
+    // column extraction from https://stackoverflow.com/a/12985968/9994049
+    return (boardContent[x].every(allSame)) || (boardContent.map((value) => value[y]).every(allSame));
+  };
+
   // an object with the methods createBoard, getBoardContent and setBoardContent 
   // is returned.
-  return { createBoard, getBoardContent, setBoardContent };
+  return { createBoard, getBoardContent, setBoardContent, gameComplete };
 }
 )();
 
@@ -63,6 +73,7 @@ const gameController = (() => {
         // the player cannot be changed until a valid marking.
         changePlayerButton.disabled = true;
         theBoard.setBoardContent(rowIndex, columnIndex, "x")
+        console.log(theBoard.gameComplete(rowIndex, columnIndex, "x"));
       }
       else {
         // erase the notification that it is the turn of the player 2.
@@ -74,6 +85,7 @@ const gameController = (() => {
         // the player cannot be changed until a valid marking.
         changePlayerButton.disabled = true;
         theBoard.setBoardContent(rowIndex, columnIndex, "o");
+        console.log(theBoard.gameComplete(rowIndex, columnIndex, "o"));
       }
       // register the position of the cell on which a mark has been put 
       // following the rules of the game.
