@@ -63,9 +63,11 @@ const gameController = (() => {
       const columnIndex = markedCellsTemp[0][1]-1;
       if (whichPlayer === "player1") {
         // erase the notification that it is the turn of the player 1.
-        playerNoticeButtonArray[0].textContent = "";
+        playerNoticeButtonArray[0].textContent = "PLAYER 1'S TURN NOW!";
+        playerNoticeButtonArray[0].style.color = "white";
         // write the notification that it is the turn of the player 2.
         playerNoticeButtonArray[2].textContent = "PLAYER 2'S TURN NOW!";
+        playerNoticeButtonArray[2].style.color = "black";
         // now, it is the turn of the second player.
         whichPlayer = "player2";
         // the player cannot be changed until a valid marking.
@@ -76,9 +78,11 @@ const gameController = (() => {
       }
       else {
         // erase the notification that it is the turn of the player 2.
-        playerNoticeButtonArray[2].textContent = "";
+        playerNoticeButtonArray[2].textContent = "PLAYER 2'S TURN NOW!";
+        playerNoticeButtonArray[2].style.color = "white";
         // write the notification that it is the turn of the player 1.
         playerNoticeButtonArray[0].textContent = "PLAYER 1'S TURN NOW!";
+        playerNoticeButtonArray[0].style.color = "black";
         // now, it is the turn of the first player.
         whichPlayer = "player1";
         // the player cannot be changed until a valid marking.
@@ -182,7 +186,7 @@ const gameController = (() => {
     // first player notification
     const player1Notice = document.createElement('div');
     player1Notice.className = "playerNotice";
-    player1Notice.textContent = "PLAYER 1'S TURN NOW!"
+    player1Notice.textContent = "PLAYER 1'S TURN NOW!";
     gameButtonsDiv.appendChild(player1Notice);
     playerNoticeButtonArray[0] = player1Notice;
     // change player button
@@ -196,7 +200,8 @@ const gameController = (() => {
     // second player notification
     const player2Notice = document.createElement('div');
     player2Notice.className = "playerNotice";
-    player2Notice.textContent = "";
+    player2Notice.textContent = "PLAYER 2'S TURN NOW!";
+    player2Notice.style.color = "white";
     gameButtonsDiv.appendChild(player2Notice);
     playerNoticeButtonArray[2] = player2Notice;
   }
