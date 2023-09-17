@@ -21,7 +21,9 @@ const theBoard = (() => {
     boardContent[x][y] = theMark;
   };
 
+  // detects if the marks on a row or a column are the same.
   const gameComplete = (x, y, theMark) => {
+    // function to be used in the array method "map".
     const allSame = (value) => value === theMark;
     // column extraction from https://stackoverflow.com/a/12985968/9994049
     return (boardContent[x].every(allSame)) || (boardContent.map((value) => value[y]).every(allSame));
@@ -68,6 +70,7 @@ const gameController = (() => {
         whichPlayer = "player2";
         // the player cannot be changed until a valid marking.
         changePlayerButton.disabled = true;
+        // the mark is recorded in the board array.
         theBoard.setBoardContent(rowIndex, columnIndex, "x")
         console.log(theBoard.gameComplete(rowIndex, columnIndex, "x"));
       }
@@ -80,6 +83,7 @@ const gameController = (() => {
         whichPlayer = "player1";
         // the player cannot be changed until a valid marking.
         changePlayerButton.disabled = true;
+        // the mark is recorded in the board array.
         theBoard.setBoardContent(rowIndex, columnIndex, "o");
         console.log(theBoard.gameComplete(rowIndex, columnIndex, "o"));
       }
