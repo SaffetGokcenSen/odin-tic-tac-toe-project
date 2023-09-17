@@ -51,6 +51,8 @@ const gameController = (() => {
 
     // the function which is invoked when the "Change player" button is pressed.
     const nextPlayerFunc = () => {
+      const rowIndex = markedCellsTemp[0][0]-1;
+      const columnIndex = markedCellsTemp[0][1]-1;
       if (whichPlayer === "player1") {
         // erase the notification that it is the turn of the player 1.
         playerNoticeButtonArray[0].textContent = "";
@@ -60,6 +62,7 @@ const gameController = (() => {
         whichPlayer = "player2";
         // the player cannot be changed until a valid marking.
         changePlayerButton.disabled = true;
+        theBoard.setBoardContent(rowIndex, columnIndex, "x")
       }
       else {
         // erase the notification that it is the turn of the player 2.
@@ -70,12 +73,13 @@ const gameController = (() => {
         whichPlayer = "player1";
         // the player cannot be changed until a valid marking.
         changePlayerButton.disabled = true;
+        theBoard.setBoardContent(rowIndex, columnIndex, "o");
       }
       // register the position of the cell on which a mark has been put 
       // following the rules of the game.
       markedCells = markedCells.concat(markedCellsTemp);
       // the finally selected cell gets its default color
-      boardArray[markedCellsTemp[0][0]-1][markedCellsTemp[0][1]-1].style.backgroundColor = "cadetblue";
+      boardArray[rowIndex][columnIndex].style.backgroundColor = "cadetblue";
       // free the temporary array of cell locations
       markedCellsTemp = [];
       // the next player has not put a mark yet.
@@ -275,7 +279,7 @@ const gameController = (() => {
       theDim = +selRadio.value[0];
       // create the board array and initialize its content according to the 
       // selected dimension.
-      // theBoard.createBoard(theDim);
+      theBoard.createBoard(theDim);
       // theBoard.setBoardContent(0, 0, 'x');
       // theBoard.setBoardContent(1, 1, 'o');
       // remove the selection user interface after the selection is made.
