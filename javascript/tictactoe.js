@@ -23,10 +23,6 @@ const theBoard = (() => {
 
   const gameComplete = (x, y, theMark) => {
     const allSame = (value) => value === theMark;
-    // console.log(boardContent[x].every(isRowDone));
-    // console.log();
-    // console.log(boardContent.map((value) => value[y]).every(isRowDone));
-
     // column extraction from https://stackoverflow.com/a/12985968/9994049
     return (boardContent[x].every(allSame)) || (boardContent.map((value) => value[y]).every(allSame));
   };
