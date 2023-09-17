@@ -288,8 +288,6 @@ const gameController = (() => {
       // create the board array and initialize its content according to the 
       // selected dimension.
       theBoard.createBoard(theDim);
-      // theBoard.setBoardContent(0, 0, 'x');
-      // theBoard.setBoardContent(1, 1, 'o');
       // remove the selection user interface after the selection is made.
       selectionDiv.remove();
 
