@@ -52,10 +52,19 @@ const gameController = (() => {
   let markedCellsTemp = [];
   // the variable to indicate if the player has put a mark on the board.
   let markPut = 0;
+  // the maximum number of moves that can be made in the game.
+  let moveLimit;
+  // the number of moves made so far.
+  let numMoves = 0;
+  // boolean for the game status.
+  let gameFinished;
 
   // draws the game board to the screen as soon as the requested dimension is 
   // obtained from the user.
   const drawTheBoard = () => {
+    // the controller to give the abort signal to the event listeners of the 
+    // board cells.
+    const controller = new AbortController();
 
     // the function which is invoked when the "Change player" button is pressed.
     const nextPlayerFunc = () => {
@@ -74,7 +83,16 @@ const gameController = (() => {
         changePlayerButton.disabled = true;
         // the mark is recorded in the board array.
         theBoard.setBoardContent(rowIndex, columnIndex, "x")
-        console.log(theBoard.gameComplete(rowIndex, columnIndex, "x"));
+        gameFinished = theBoard.gameComplete(rowIndex, columnIndex, "x")
+        if (gameFinished) {
+          playerNoticeButtonArray[0].textContent = "PLAYER 1 WINS!";
+          playerNoticeButtonArray[2].textContent = "PLAYER 1 WINS!";
+          playerNoticeButtonArray[0].style.color = "black";
+          playerNoticeButtonArray[2].style.color = "black";
+
+          // the event listeners of the cells are aborted.
+          controller.abort();
+        }
       }
       else {
         // erase the notification that it is the turn of the player 2.
@@ -89,7 +107,16 @@ const gameController = (() => {
         changePlayerButton.disabled = true;
         // the mark is recorded in the board array.
         theBoard.setBoardContent(rowIndex, columnIndex, "o");
-        console.log(theBoard.gameComplete(rowIndex, columnIndex, "o"));
+        gameFinished = theBoard.gameComplete(rowIndex, columnIndex, "o");
+        if (gameFinished) {
+          playerNoticeButtonArray[0].textContent = "PLAYER 2 WINS!";
+          playerNoticeButtonArray[2].textContent = "PLAYER 2 WINS!";
+          playerNoticeButtonArray[0].style.color = "black";
+          playerNoticeButtonArray[2].style.color = "black";
+
+          // the event listeners of the cells are aborted.
+          controller.abort();
+        }
       }
       // register the position of the cell on which a mark has been put 
       // following the rules of the game.
@@ -100,6 +127,15 @@ const gameController = (() => {
       markedCellsTemp = [];
       // the next player has not put a mark yet.
       markPut = 0;
+      // number of moves made so far is increased by 1.
+      numMoves += 1;
+      if (numMoves === moveLimit) {
+        playerNoticeButtonArray[0].textContent = "TIE!";
+        playerNoticeButtonArray[0].style.color = "black";
+        playerNoticeButtonArray[2].textContent = "TIE!";
+        playerNoticeButtonArray[0].style.color = "black";
+        changePlayerButton.disabled = true;
+      }
     }
 
     // the function which enables a player to put a mark on the board following 
@@ -173,7 +209,7 @@ const gameController = (() => {
         gridCell.style.gridColumnEnd = j + 2;
         gridCell.className = "gridCell";
         gridCell.textContent = "";
-        gridCell.addEventListener('click', drawSign);
+        gridCell.addEventListener('click', drawSign, { signal: controller.signal });
         boardArray[i][j] = gridCell;
         boardDiv.appendChild(gridCell);
       }
@@ -313,6 +349,7 @@ const gameController = (() => {
       
       // draw the board to the screen
       drawTheBoard();
+      moveLimit = theDim * theDim;
     }
     // the click on the choose button is listened to.
     pChoose.addEventListener("click", setDim);
