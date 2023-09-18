@@ -13,9 +13,6 @@ const theBoard = (() => {
     }
   };
 
-  // the method returning the board content
-  const getBoardContent = () => boardContent;
-
   // the method to set a specific location of the board to the specified mark.
   const setBoardContent = (x, y, theMark) => {
     boardContent[x][y] = theMark;
@@ -31,7 +28,7 @@ const theBoard = (() => {
 
   // an object with the methods createBoard, getBoardContent and setBoardContent 
   // is returned.
-  return { createBoard, getBoardContent, setBoardContent, gameComplete };
+  return { createBoard, setBoardContent, gameComplete };
 }
 )();
 
@@ -356,7 +353,7 @@ const gameController = (() => {
   };
 
   // an object with the method getBoardDim and the property theDim is returned.
-  return { getBoardDim, theDim };
+  return { getBoardDim};
 }
 )();
 
